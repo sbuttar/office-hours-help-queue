@@ -18,6 +18,10 @@ CourseQueueClientActionHandler.prototype.queuePop = function () {
   this.subscription.perform('queue_pop');
 };
 
+CourseQueueClientActionHandler.prototype.queuePopAndPin = function () {
+  this.subscription.perform('queue_pop_and_pin');
+}
+
 CourseQueueClientActionHandler.prototype.takeQueueOffline = function () {
   this.subscription.perform('take_queue_offline');
 };

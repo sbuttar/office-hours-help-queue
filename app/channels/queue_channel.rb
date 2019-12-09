@@ -96,6 +96,26 @@ class QueueChannel < ApplicationCable::Channel
     broadcast_request_change('resolve_request', request)
   end
 
+  def queue_pop_and_pin(data)
+    authorize :instructor_only
+
+    # Perform pinning first 
+    request = load_request(data)
+
+    if request.resolver # unpin
+      request.update! resolver: nil
+    else # pin
+      request.update! resolver: current_user
+    end
+
+    broadcast_request_change('update_request', request)
+
+    # Perform popping second
+    request = @course_queue.pop!(current_user)
+
+    broadcast_request_change('resolve_request', request)
+  end
+
   def take_queue_offline(data)
     authorize :instructor_only
 

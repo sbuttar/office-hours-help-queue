@@ -241,6 +241,7 @@ var CourseQueue = React.createClass({
           currentUserId={this.props.currentUserId}
           queueLength={this.state.requests.length}
           queuePop={this.handler.queuePop.bind(this.handler)}
+          queuePopAndPin={this.handler.queuePopAndPin.bind(this.handler)}
           emptyQueue={this.handler.emptyQueue.bind(this.handler)}
           setInstructorStatus={this.handler.setInstructorStatus.bind(this.handler)}
           takeQueueOffline={this.handler.takeQueueOffline.bind(this.handler)}
