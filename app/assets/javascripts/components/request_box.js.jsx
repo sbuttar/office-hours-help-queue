@@ -13,6 +13,7 @@ var RequestBox = React.createClass({
             total={this.props.requests.length} />
         </h4>
         <RequestList
+          anonymousMode={this.props.anonymousMode}
           requests={this.props.requests}
           currentUserId={this.props.currentUserId}
           currentGroupId={this.props.currentGroupId}

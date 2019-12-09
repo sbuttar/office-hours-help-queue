@@ -60,6 +60,27 @@ var Request = React.createClass({
       );
     }
 
+    if (this.props.anonymousMode) {
+      return (
+      <div className={active + "comment"}>
+        <Avatar url="http://anonymous_img.url" /> {/*change to actual anonymous image later */}
+        <div className="content">
+          <span className="author">Anonymous Author</span>
+          <a ref={this.ref} href="" onClick={function (e) { e.preventDefault(); }}
+             data-clipboard-text={this.props.request.requester.email}
+             className="metadata">{this.props.request.requester.email}</a>
+          <div className="ui slightly padded list">
+            <LabeledItem icon="clock">{this.state.ts}</LabeledItem>
+            <LabeledItem icon="marker">Anonymous Location</LabeledItem>
+            <LabeledItem icon="write">Anonymous Description</LabeledItem>
+            {pinnedByUser}
+          </div>
+          {actions}
+        </div>
+      </div>
+      );
+    }
+
     return (
       <div className={active + "comment"}>
         <Avatar url={this.props.request.requester.avatar_url} />

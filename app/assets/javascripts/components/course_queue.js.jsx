@@ -3,6 +3,7 @@ var CourseQueue = React.createClass({
     return {
       enabled: false, // whether or not we're connecting or connected
       focused: true, // whether we're the currently active window
+      anonymousMode: false, // whether or not we're on anonymous mode
       instructorMode: this.props.instructor,
       requests: [],
       instructors: [],
@@ -182,6 +183,11 @@ var CourseQueue = React.createClass({
       instructorMode: mode,
     });
   },
+  reverseAnonymousMode: function () {
+    this.setState({
+      anonymousMode: !this.state.anonymousMode,
+    });
+  },
   getMyFirstRequest: function () {
     var index = -1;
     if (this.props.groupMode) {
@@ -242,6 +248,7 @@ var CourseQueue = React.createClass({
           queueLength={this.state.requests.length}
           queuePop={this.handler.queuePop.bind(this.handler)}
           queuePopAndPin={this.handler.queuePopAndPin.bind(this.handler)}
+          reverseAnonymousMode={this.handler.reverseAnonymousMode}
           emptyQueue={this.handler.emptyQueue.bind(this.handler)}
           setInstructorStatus={this.handler.setInstructorStatus.bind(this.handler)}
           takeQueueOffline={this.handler.takeQueueOffline.bind(this.handler)}
@@ -251,6 +258,7 @@ var CourseQueue = React.createClass({
       studentButton = 'active';
       panel = (
         <StudentPanel
+          anonymousMode={this.state.anonymousMode}
           segmentClass={this.getSegmentClass()}
           requestHelp={this.handler.newRequest.bind(this.handler)}
           cancelRequest={this.handler.cancelRequest.bind(this.handler)}
@@ -321,6 +329,7 @@ var CourseQueue = React.createClass({
         title={title}
         hideEmpty={hideEmpty}
         segmentClass={this.getSegmentClass()}
+        anonymousMode={this.state.anonymousMode}
         requests={requests}
         currentUserId={this.props.currentUserId}
         currentGroupId={this.props.groupMode ? this.props.courseGroupId : null}

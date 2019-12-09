@@ -14,6 +14,13 @@ var InstructorPanel = React.createClass({
       action: this.props.queuePopAndPin,
     };
   },
+  getAnonymousModeButton: function() {
+    return {
+      title: 'Anonymous Mode',
+      className: this.buttonBaseClass + "large",
+      action: this.props.reverseAnonymousMode,
+    };
+  },
   getInstructorToggleButtonData: function () {
     return {
       title: this.props.online ?  'Go Offline' : 'Go Online',
@@ -53,6 +60,7 @@ var InstructorPanel = React.createClass({
 
         <Action data={this.getQueuePopButtonData()} />
         <Action data={this.getQueuePopAndPinButtonData()} />
+        <Action data={this.getAnonymousModeButton()} />
         <Action data={this.getInstructorToggleButtonData()} />
         <Action data={this.getTakeQueueOfflineButtonData()} />
         <Action data={this.emptyQueueButtonData()} />

@@ -13,7 +13,13 @@ var StudentPanel = React.createClass({
     }
   },
   getState: function (myRequest) {
-    if (myRequest) {
+    // Display request in anonymous mode?
+    if (myRequest && this.props.anonymousMode) {
+      return {
+        location: 'Anonymous Location',
+        description: 'Anonymous Description'
+      }
+    } else if (myRequest) {
       return myRequest.request;
     } else {
       return {
